@@ -15,6 +15,9 @@ my $router = Router::Boom::Method->new();
 
     # /-/
     $router->add( [qw/GET POST PUT DELETE/], '/-/{api:.*}' => 'PassThrough#request' );
+
+    # /v/
+    $router->add( [qw/GET/], '/v/check' => 'Validator#check' );
 }
 
 sub dispatch {
