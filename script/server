@@ -1,0 +1,29 @@
+#!perl
+use 5.10.0;
+use warnings;
+use File::Basename;
+use File::Spec;
+use lib File::Spec->catdir(dirname(__FILE__), '../lib');
+use Plack::Builder;
+use Plack::Loader;
+use Trexyll;
+use Trexyll::Web;
+
+my $basedir = File::Spec->rel2abs( File::Spec->catdir( (dirname(__FILE__), '..' ) ) );
+{
+    no strict 'refs';
+    *{"Trexyll::base_dir"} = sub { $basedir };
+}
+
+my $app = builder {
+    enable 'Plack::Middleware::ReverseProxy';
+    mount '/' => Trexyll::Web->to_app();
+};
+
+my $loader = Plack::Loader->load(
+    'Starlet',
+    port        => 5525,
+    host        => '127.0.0.1',
+    max_workers => 4,
+);
+$loader->run( $app );
