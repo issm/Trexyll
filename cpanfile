@@ -1,7 +1,10 @@
 requires 'Data::Recursive::Encode', '0.04';
+requires 'File::Slurp', '9999.19';
 requires 'JSON', '2.90';
 requires 'Module::Find', '0.11';
 requires 'Plack', '1.0030';
 requires 'Plack::Middleware::ReverseProxy', '0.15';
 requires 'Router::Boom', '0.07';
 requires 'Starlet', '0.20';
+requires 'TOML', '0.92';
+requires 'WWW::Trello::Lite', '1.00';
