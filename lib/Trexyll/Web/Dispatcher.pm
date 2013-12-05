@@ -12,6 +12,9 @@ useall( $controller_class_prefix );
 my $router = Router::Boom::Method->new();
 {
     $router->add( [qw/GET/], '/hello' => 'Root#hello' );
+
+    # /-/
+    $router->add( [qw/GET POST PUT DELETE/], '/-/{api:.*}' => 'PassThrough#request' );
 }
 
 sub dispatch {

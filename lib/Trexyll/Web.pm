@@ -4,8 +4,8 @@ use warnings;
 use parent qw/Trexyll Plack::Component/;
 use Plack::Request;
 use JSON;
-use Data::Recursive::Encode;
 use Trexyll::Web::Dispatcher;
+use Trexyll::Util;
 
 sub req { $_[0]->{req} }
 
@@ -26,7 +26,7 @@ sub handle_request {
 
 sub render_json {
     my ($self, $data, $code) = @_;
-    my $json = encode_json( Data::Recursive::Encode->encode_utf8( $data ) );
+    my $json = encode_json( $data );
     my $res = $self->req->new_response( $code || 200 );
     $res->content_type( 'application/json' );
     $res->content( $json );
