@@ -18,6 +18,9 @@ my $router = Router::Boom::Method->new();
 
     # /v/
     $router->add( [qw/GET/], '/v/check' => 'Validator#check' );
+
+    # /c/
+    $router->add( [qw/GET POST PUT DELETE/], '/c/{custom_api:.*}' => 'Custom#request' );
 }
 
 sub dispatch {

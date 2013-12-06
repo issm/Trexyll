@@ -6,14 +6,9 @@ use File::Spec;
 use lib File::Spec->catdir(dirname(__FILE__), '../lib');
 use Plack::Builder;
 use Plack::Loader;
-use Trexyll;
 use Trexyll::Web;
 
 my $basedir = File::Spec->rel2abs( File::Spec->catdir( (dirname(__FILE__), '..' ) ) );
-{
-    no strict 'refs';
-    *{"Trexyll::base_dir"} = sub { $basedir };
-}
 
 my $app = builder {
     enable 'Plack::Middleware::ReverseProxy';
